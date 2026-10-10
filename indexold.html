@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - DEP MN</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      font-size: 24px;
+      text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.6);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+      box-shadow: 0 6px 12px rgba(41, 128, 185, 0.7);
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid white;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: #ffffffcc;
+      text-align: center;
+      user-select: none;
+      position: relative;
+      letter-spacing: 1.1px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      background: rgba(52, 152, 219, 0.3);
+      box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: default;
+      max-width: 350px;
+    }
+
+    .footer-text:hover {
+      background: #3498db;
+      color: #fff;
+      box-shadow: 0 0 20px #3498db;
+      text-shadow: 0 0 5px #fff;
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login to DEP-MN</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Username</label>
+        <input type="text" id="email" required placeholder="Enter username" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="Enter password" autocomplete="current-password" />
+      </div>
+      <button type="submit" id="loginBtn">
+        Login
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </form>
+  </div>
+
+  <div class="footer-text" title="Project Developer">
+    This Project is developed by Mr. Ajay Raikwar
+  </div>
+
+  <script>
+    const users = {
+      "depmnadmin": "abcd1234",
+      "ajay": "ajay123",
+      "praveen": "praveen123",
+      "muskan": "muskan123"
+    };
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const loginBtn = document.getElementById('loginBtn');
+      const spinner = document.getElementById('spinner');
+
+      // Show spinner
+      spinner.style.display = 'inline-block';
+      loginBtn.disabled = true;
+
+      setTimeout(() => {
+        spinner.style.display = 'none';
+        loginBtn.disabled = false;
+
+        if (users[email] && users[email] === password) {
+          window.location.href = 'home.html';
+        } else {
+          alert('Invalid username or password');
+        }
+      }, 1500); // simulate login delay
+    });
+  </script>
+
+</body>
+</html>
+
